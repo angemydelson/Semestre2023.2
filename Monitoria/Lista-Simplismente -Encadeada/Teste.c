@@ -2,18 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
-struct date {
-    int dia;
-    int mes;
-    int ano;
-};
-typedef struct date Date;
-
 struct employee {
     int id;
-    char name[41];
-    double income;
-    Date dbirth;
     struct employee *next;
 };
 typedef struct employee Employee;
@@ -22,15 +12,10 @@ typedef struct employee Employee;
 
 // }
 
-Employee *criarEmployee(int id, char name[], double income, int ano, int mes, int dia) {
+Employee *criarEmployee(int id) {
     Employee *funcionario;
     funcionario = (Employee *)malloc(sizeof(Employee));
-    strcpy(funcionario->name, name);
-    funcionario->income = income;
     funcionario->id = id;
-    funcionario->dbirth.ano = ano;
-    funcionario->dbirth.mes = mes;
-    funcionario->dbirth.dia = dia;
     funcionario->next = NULL;
     return funcionario; // Você esqueceu de retornar o ponteiro para o primeiro funcionário
 }
@@ -110,16 +95,15 @@ Employee *excluirElemento(Employee *first, int id){
 
 void imprimirLista(Employee *first) {
     Employee *atual = first;
+    printf("[");
     while (atual != NULL) {
-        printf("-=====================================================-\n");
-        printf("ID: %d\n", atual->id);
-        printf("Nome: %s\n", atual->name);
-        printf("Renda: %.2lf\n", atual->income);
-        printf("Data de Nascimento: %d/%d/%d\n", atual->dbirth.dia, atual->dbirth.mes, atual->dbirth.ano);
-        printf("\n");
-        printf("-=====================================================-\n");
+        // printf("-=====================================================-\n");
+        printf("%d ,", atual->id);
+        // printf("\n");
+        // printf("-=====================================================-\n");
         atual = atual->next;
     }
+    printf("]\n");
 }
 
 
@@ -129,35 +113,64 @@ void desalocarLista(Employee *first) {
     free(first);
 }
 
+Employee *diferencaList(Employee *lista1, Employee *lista2){
+    Employee *aux, *aux2, *lista3 = NULL, *elementoLista3;
+    int diff;
+    aux2 = lista2;
+    for (aux = lista1; aux != NULL; aux = aux->next){
+        diff = aux2->id - aux->id;
+        elementoLista3 = criarEmployee(diff);
+        lista3 = incluirElementosFim(lista3, elementoLista3);
+        aux2 = aux2->next;
+    }
+    return lista3;
+}
 
 int main() {
-    Employee *first = NULL; // Inicialmente, a lista está vazia
+    Employee *first = NULL, *lista2 = NULL, *lista3; // Inicialmente, a lista está vazia
     Employee *funcionario;
-   
+    
     // Criar o primeiro funcionário
-    first = criarEmployee(1, "John", 50000.0, 1990, 5, 15);
+    first = criarEmployee(1);
 
     // Adicionar um segundo funcionário
-    funcionario = criarEmployee(2, "Angemy", 60000.0, 1985, 8, 25);
+
+    funcionario = criarEmployee(2);
     first = incluirElementosFim(first, funcionario);
 
-    funcionario = criarEmployee(3, "Jane", 70000.0, 1685, 8, 55);
-    first = incluirElementosFim(first, funcionario);
-
-    funcionario = criarEmployee(4, "Mireille", 7005400.0, 2685, 10, 3);
+    funcionario = criarEmployee(3);
     first = incluirElementosFim(first, funcionario);
     // imprimirLista(first);
 
-    funcionario = criarEmployee(3, "Midelta", 7005400.0, 2685, 11, 3);
+    funcionario = criarEmployee(4);
     first = incluirElementosPosId(first, funcionario, 3);
 
-    funcionario = criarEmployee(5, "Patricia", 7005400.0, 2685, 11, 3);
-    first = incluirElementosPosId(first, funcionario, 4);
+    lista2 = criarEmployee(2);
 
-    funcionario = criarEmployee(5, "Delva", 7005400.0, 2685, 11, 3);
-    first = incluirElementosAntId(first, funcionario, 1);
+    // Adicionar um segundo funcionário
+
+    funcionario = criarEmployee(7);
+    lista2 = incluirElementosFim(lista2, funcionario);
+
+    funcionario = criarEmployee(8);
+    lista2 = incluirElementosFim(lista2, funcionario);
+    // imprimirLista(first);
+
+    funcionario = criarEmployee(6);
+    lista2 = incluirElementosPosId(lista2, funcionario, 3);
+
+
+
+    // funcionario = criarEmployee(5);
+    // first = incluirElementosPosId(first, funcionario, 4);
+
+    // funcionario = criarEmployee(5);
+    // first = incluirElementosAntId(first, funcionario, 1);
     // Imprimir a lista de funcionários
     imprimirLista(first);
+    imprimirLista(lista2);
+    lista3 = diferencaList(first, lista2);
+    imprimirLista(lista3);
     // imprimirListarecursivo(first);
     // excluirElemento(first, 5);
     // imprimirLista(first);
