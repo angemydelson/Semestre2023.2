@@ -159,21 +159,9 @@ int main() {
     funcionario = criarEmployee(6);
     lista2 = incluirElementosPosId(lista2, funcionario, 3);
 
-
-
-    // funcionario = criarEmployee(5);
-    // first = incluirElementosPosId(first, funcionario, 4);
-
-    // funcionario = criarEmployee(5);
-    // first = incluirElementosAntId(first, funcionario, 1);
-    // Imprimir a lista de funcionários
     imprimirLista(first);
     imprimirLista(lista2);
     lista3 = diferencaList(first, lista2);
     imprimirLista(lista3);
-    // imprimirListarecursivo(first);
-    // excluirElemento(first, 5);
-    // imprimirLista(first);
-
     return 0;
 }

@@ -76,7 +76,7 @@ Employee *incluirElementosMeio(Sentinela *lista, Employee *funcionario, int id) 
         lista->last = funcionario;
     } else {
         for (aux = lista->first; aux!=NULL; aux = aux->next){
-            if (id == aux->id){
+            if (id == aux->id){ // VERIFICAR SE AUX APONTA PARA O PRIMEIRO
                 funcionario->next = aux;
                 funcionario->prev = aux->prev;
                 aux->prev->next = funcionario;
