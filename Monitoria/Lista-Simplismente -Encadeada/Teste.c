@@ -126,30 +126,85 @@ Employee *diferencaList(Employee *lista1, Employee *lista2){
     return lista3;
 }
 
+int existeElemento(Employee *lista, int valor) {
+    Employee *aux;
+    for (aux = lista; aux != NULL; aux = aux->next) {
+        if (aux->id == valor) {
+            return 1; // O elemento já existe na lista
+        }
+    }
+    return 0; // O elemento não foi encontrado na lista
+}
+
+Employee *intersectionList(Employee *lista1, Employee *lista2){
+    Employee *aux, *aux2, *lista3 = NULL, *elementoLista3;
+    int valor, verificador;
+    aux2 = lista2;
+    for (aux = lista1; aux != NULL; aux = aux->next){
+        for (aux2 = lista2; aux2 != NULL; aux2 = aux2->next){
+            if (aux->id == aux2->id){
+                verificador = existeElemento(lista3, aux->id);
+                if(verificador == 0){
+                    valor = aux->id;
+                    elementoLista3 = criarEmployee(valor);
+                    lista3 = incluirElementosFim(lista3, elementoLista3);
+                    break;
+                }
+                
+            }
+        }
+    }
+    return lista3;
+}
+
+
+
+Employee *UnionList(Employee *lista1, Employee *lista2){
+    Employee *aux, *aux2, *lista3 = NULL, *lista4, *elementoLista3;
+    int valor, verificador;
+    for (aux = lista1; aux != NULL; aux = aux->next){
+        verificador = existeElemento(lista3, aux->id);
+        if (verificador == 0){
+            elementoLista3 = criarEmployee(aux->id);
+            lista3 = incluirElementosFim(lista3, elementoLista3);
+        }
+        
+    }
+   for (aux = lista2; aux != NULL; aux = aux->next){
+        verificador = existeElemento(lista3, aux->id);
+        if (verificador == 0){
+            elementoLista3 = criarEmployee(aux->id);
+            lista3 = incluirElementosFim(lista3, elementoLista3);
+        }
+        
+    }
+   
+    return lista3;
+}
 int main() {
-    Employee *first = NULL, *lista2 = NULL, *lista3; // Inicialmente, a lista está vazia
+    Employee *first = NULL, *lista2 = NULL, *lista3, *lista4; // Inicialmente, a lista está vazia
     Employee *funcionario;
     
     // Criar o primeiro funcionário
-    first = criarEmployee(1);
+    first = criarEmployee(6);
+
+    // Adicionar um segundo funcionário
+
+    funcionario = criarEmployee(6);
+    first = incluirElementosFim(first, funcionario);
+
+    funcionario = criarEmployee(8);
+    first = incluirElementosFim(first, funcionario);
+    // imprimirLista(first);
+
+    funcionario = criarEmployee(6);
+    first = incluirElementosPosId(first, funcionario, 1);
+
+    lista2 = criarEmployee(7);
 
     // Adicionar um segundo funcionário
 
     funcionario = criarEmployee(2);
-    first = incluirElementosFim(first, funcionario);
-
-    funcionario = criarEmployee(3);
-    first = incluirElementosFim(first, funcionario);
-    // imprimirLista(first);
-
-    funcionario = criarEmployee(4);
-    first = incluirElementosPosId(first, funcionario, 3);
-
-    lista2 = criarEmployee(2);
-
-    // Adicionar um segundo funcionário
-
-    funcionario = criarEmployee(7);
     lista2 = incluirElementosFim(lista2, funcionario);
 
     funcionario = criarEmployee(8);
@@ -157,11 +212,15 @@ int main() {
     // imprimirLista(first);
 
     funcionario = criarEmployee(6);
-    lista2 = incluirElementosPosId(lista2, funcionario, 3);
+    lista2 = incluirElementosPosId(lista2, funcionario, 2);
 
     imprimirLista(first);
     imprimirLista(lista2);
-    lista3 = diferencaList(first, lista2);
+    printf("Interseção entre lista 1 e 2 😏:\n");
+    lista3 = intersectionList(first, lista2);
     imprimirLista(lista3);
+    printf("Union entre lista 1 e 2 😏:\n");
+    lista4 = UnionList(first, lista2);
+    imprimirLista(lista4);
     return 0;
 }
