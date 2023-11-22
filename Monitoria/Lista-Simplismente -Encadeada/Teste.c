@@ -139,7 +139,7 @@ int existeElemento(Employee *lista, int valor) {
 Employee *intersectionList(Employee *lista1, Employee *lista2){
     Employee *aux, *aux2, *lista3 = NULL, *elementoLista3;
     int valor, verificador;
-    aux2 = lista2;
+    //aux2 = lista2;
     for (aux = lista1; aux != NULL; aux = aux->next){
         for (aux2 = lista2; aux2 != NULL; aux2 = aux2->next){
             if (aux->id == aux2->id){
