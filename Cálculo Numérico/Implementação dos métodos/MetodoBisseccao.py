@@ -55,7 +55,7 @@ b = 1
 
 # Tolerância e número máximo de iterações
 tolerance = 10**-3  # Tolerância definida
-max_iterations = 100  # Número máximo de iterações
+max_iterations = 6  # Número máximo de iterações
 
 # Chamada da função para criar a tabela de bissecção
 root_approx = bisection_table(example_function, a, b, tolerance, max_iterations)
