@@ -1,6 +1,8 @@
 import sympy as sp
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_pdf import PdfPages
+import numpy as np
+import math
 
 def secant_method_table(f, x0, x1, tol, max_iter, pdf_filename=None):
     # Definir a variável simbólica
@@ -87,14 +89,15 @@ def save_table_as_pdf_secant(iteration_list, x0_list, x1_list, f_x0_list, f_x1_l
 x = sp.symbols('x')
 
 # Função de exemplo
-example_function_secant = x**3 - x*9 + 3
+example_function_secant =  2*x**2 - x*3 + sp.log(x)
+
 
 # Pontos iniciais x0 e x1
-x0_secant = 0
-x1_secant = 1
+x0_secant = 1
+x1_secant = 2
 
 # Tolerância e número máximo de iterações
-tolerance_secant = 5*10**-4
+tolerance_secant = 10**-4
 max_iterations_secant = 20
 
 # Nome do arquivo PDF para salvar a tabela

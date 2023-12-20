@@ -22,7 +22,7 @@ def newton_polynomial(x_data, y_data, x):
     x: evaluation point(s)
     """
     a = _poly_newton_coefficient(x_data, y_data)
-    n = len(x_data) - 1  # Degree of polynomial
+    n = len(x_data) - 1
     p = a[n]
 
     for k in range(1, n + 1):
@@ -30,8 +30,8 @@ def newton_polynomial(x_data, y_data, x):
 
     return p
 
-x = [0, 1, 2, 4, 5, 6]
-y = [1, 14, 15, 5, 6, 19]
-#receb valores de x, os repsctivos valores de y 
+x = [0, 1, 2, 3]
+y = [1, 2, 3, 6]
+#receb valores de x, os respectivos valores de y 
 #e o valor de X que devemos encontrar
-print(newton_polynomial(x, y, 3))
+print(newton_polynomial(x, y, 1.5))

@@ -1,8 +1,3 @@
-# Python3 code
-# Implementing Linear interpolation
-# Creating Function to calculate the
-# linear interpolation
-
 def interpolation(d, x):
 	output = d[0][1] + (x - d[0][0]) * ((d[1][1] - d[0][1])/(d[1][0] - d[0][0]))
 
